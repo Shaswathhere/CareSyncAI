@@ -1,0 +1,49 @@
+{
+  "timestamp": "20260915_152257",
+  "total_tests": 50,
+  "passed_tests": 1,
+  "pass_rate_pct": 2.0,
+  "avg_overall_score": 0.328,
+  "avg_retrieval_precision": 0.12,
+  "avg_faithfulness": 1.0,
+  "avg_answer_correctness": 0.02,
+  "avg_latency_ms": 731.7,
+  "category_breakdown": {
+    "maternal_child_health": {
+      "total": 10,
+      "passed": 0,
+      "pass_rate_pct": 0.0,
+      "avg_score": 0.35
+    },
+    "infectious_diseases": {
+      "total": 10,
+      "passed": 0,
+      "pass_rate_pct": 0.0,
+      "avg_score": 0.35
+    },
+    "chronic_diseases": {
+      "total": 8,
+      "passed": 0,
+      "pass_rate_pct": 0.0,
+      "avg_score": 0.35
+    },
+    "emergency_first_aid": {
+      "total": 8,
+      "passed": 0,
+      "pass_rate_pct": 0.0,
+      "avg_score": 0.35
+    },
+    "operational_logistics": {
+      "total": 8,
+      "passed": 0,
+      "pass_rate_pct": 0.0,
+      "avg_score": 0.35
+    },
+    "guardrails_out_of_scope": {
+      "total": 6,
+      "passed": 1,
+      "pass_rate_pct": 16.7,
+      "avg_score": 0.167
+    }
+  }
+}

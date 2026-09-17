@@ -1,0 +1,31 @@
+# Web UI
+# 1.41+ for st.audio_input, the microphone recorder in the Chat tab; older
+# builds fall back to an audio file uploader.
+# 1.37+ for st.dialog, used by the document delete confirmation modal.
+# Older builds fall back to st.experimental_dialog, then to an inline confirm.
+streamlit>=1.41.0
+
+# RAG Framework
+langchain>=0.2.0
+langchain-community>=0.2.0
+
+# LLM — Groq (free tier, fast inference)
+groq>=0.9.0
+langchain-groq>=0.1.0
+
+# Embeddings
+sentence-transformers>=2.7.0
+
+# PDF Processing
+pymupdf>=1.24.0
+
+# Database / Supabase
+supabase>=2.4.0
+psycopg2-binary>=2.9.9
+
+# Config
+python-dotenv>=1.0.1
+
+# Data validation
+pydantic>=2.7.0
+

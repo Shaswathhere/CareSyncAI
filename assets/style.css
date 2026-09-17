@@ -1,0 +1,734 @@
+/* =============================================================================
+   CareSync AI — Custom Theme
+   -----------------------------------------------------------------------------
+   Light/dark-aware accents, card shadows, and status tags for the Streamlit
+   UI shell. Loaded once at startup by app.py via load_css().
+============================================================================= */
+
+:root {
+    --csa-primary: #0f766e;
+    --csa-primary-light: #14b8a6;
+    --csa-bg-card: #ffffff;
+    --csa-border: #e2e8f0;
+    --csa-text-muted: #64748b;
+    --csa-shadow: 0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.04);
+
+    --csa-active-bg: #dcfce7;
+    --csa-active-text: #166534;
+    --csa-superseded-bg: #fef3c7;
+    --csa-superseded-text: #92400e;
+    --csa-archived-bg: #e2e8f0;
+    --csa-archived-text: #475569;
+
+    --csa-conflict-warn-bg: #fffbeb;
+    --csa-conflict-warn-border: #f59e0b;
+    --csa-conflict-warn-text: #78350f;
+    --csa-conflict-danger-bg: #fef2f2;
+    --csa-conflict-danger-border: #dc2626;
+    --csa-conflict-danger-text: #7f1d1d;
+    --csa-highlight-bg: #fde68a;
+    --csa-highlight-text: #422006;
+    --csa-stale-card-bg: rgba(245, 158, 11, 0.07);
+
+    --csa-danger: #dc2626;
+    --csa-danger-text: #991b1b;
+    --csa-danger-bg: rgba(220, 38, 38, 0.06);
+
+    /* Reranker relevance badge. Every pair below clears 6:1 against its own
+       background, and the badge always carries a ●●○ meter and a percentage,
+       so the band is never signalled by colour alone. */
+    --csa-confidence-high-bg: #ccfbf1;
+    --csa-confidence-high-text: #0f5f57;
+    --csa-confidence-medium-bg: #fef3c7;
+    --csa-confidence-medium-text: #8a4b0b;
+    --csa-confidence-low-bg: #e2e8f0;
+    --csa-confidence-low-text: #475569;
+
+    /* Analytics dashboard. The meter is one hue on a neutral track rather
+       than a green/red split — green against red is the one pair a
+       deuteranopic reader cannot separate, and "helpful vs not helpful" is
+       exactly the chart that invites it. */
+    --csa-meter-track: #e2e8f0;
+    --csa-meter-fill: #0d9488;
+    --csa-stat-value: #0f172a;
+
+    /* Guideline management table. The row-warning flag borrows the
+       superseded palette: both mean "this is not what you should be
+       serving", and it always carries a count and a tooltip, never colour
+       on its own. */
+    --csa-table-head: #64748b;
+    --csa-table-rule: #e2e8f0;
+    --csa-row-flag-bg: #fef3c7;
+    --csa-row-flag-text: #8a4b0b;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --csa-bg-card: #1e293b;
+        --csa-border: #334155;
+        --csa-text-muted: #94a3b8;
+
+        --csa-active-bg: #14532d;
+        --csa-active-text: #bbf7d0;
+        --csa-superseded-bg: #78350f;
+        --csa-superseded-text: #fde68a;
+        --csa-archived-bg: #334155;
+        --csa-archived-text: #cbd5e1;
+
+        --csa-conflict-warn-bg: #422006;
+        --csa-conflict-warn-border: #f59e0b;
+        --csa-conflict-warn-text: #fde68a;
+        --csa-conflict-danger-bg: #450a0a;
+        --csa-conflict-danger-border: #ef4444;
+        --csa-conflict-danger-text: #fecaca;
+        --csa-highlight-bg: #a16207;
+        --csa-highlight-text: #fef9c3;
+        --csa-stale-card-bg: rgba(245, 158, 11, 0.12);
+
+        --csa-danger: #ef4444;
+        --csa-danger-text: #fecaca;
+        --csa-danger-bg: rgba(239, 68, 68, 0.12);
+
+        --csa-confidence-high-bg: #134e4a;
+        --csa-confidence-high-text: #5eead4;
+        --csa-confidence-medium-bg: #78350f;
+        --csa-confidence-medium-text: #fde68a;
+        --csa-confidence-low-bg: #334155;
+        --csa-confidence-low-text: #cbd5e1;
+
+        --csa-meter-track: #334155;
+        --csa-meter-fill: #17a897;
+        --csa-stat-value: #e2e8f0;
+
+        --csa-table-head: #94a3b8;
+        --csa-table-rule: #334155;
+        --csa-row-flag-bg: #78350f;
+        --csa-row-flag-text: #fde68a;
+    }
+}
+
+/* ── Header ─────────────────────────────────────────────────────────────── */
+.csa-header {
+    padding: 0.25rem 0 1rem 0;
+    border-bottom: 1px solid var(--csa-border);
+    margin-bottom: 1.25rem;
+}
+
+.csa-header h1 {
+    margin: 0;
+    font-size: 1.9rem;
+    color: var(--csa-primary);
+}
+
+.csa-header p {
+    margin: 0.15rem 0 0 0;
+    color: var(--csa-text-muted);
+    font-size: 0.95rem;
+}
+
+/* ── Cards ──────────────────────────────────────────────────────────────── */
+.csa-card {
+    background: var(--csa-bg-card);
+    border: 1px solid var(--csa-border);
+    border-radius: 12px;
+    box-shadow: var(--csa-shadow);
+    padding: 0.85rem 1.1rem;
+    margin-bottom: 0.6rem;
+}
+
+.csa-muted {
+    color: var(--csa-text-muted);
+    font-size: 0.85rem;
+}
+
+/* ── Citations ──────────────────────────────────────────────────────────── */
+.csa-citation-box {
+    margin-top: 0.4rem;
+}
+
+.csa-citation-card {
+    border-left: 3px solid var(--csa-primary-light);
+}
+
+/* ── Status tags ────────────────────────────────────────────────────────── */
+.csa-status-tag {
+    display: inline-block;
+    padding: 0.15rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    vertical-align: middle;
+}
+
+.csa-status-active {
+    background: var(--csa-active-bg);
+    color: var(--csa-active-text);
+}
+
+.csa-status-superseded {
+    background: var(--csa-superseded-bg);
+    color: var(--csa-superseded-text);
+}
+
+.csa-status-archived {
+    background: var(--csa-archived-bg);
+    color: var(--csa-archived-text);
+}
+
+/* ── Reranker relevance badge ───────────────────────────────────────────────
+   Sits beside the status tag on a citation card and reports how relevant the
+   cross-encoder judged that passage to be for the question that was asked. */
+.csa-confidence-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    vertical-align: middle;
+    font-variant-numeric: tabular-nums;
+    cursor: help;
+}
+
+/* The three-dot meter is the redundant, non-colour signal of the band, so it
+   keeps full opacity while the surrounding pill stays quiet. */
+.csa-confidence-meter {
+    letter-spacing: 0.08em;
+    font-size: 0.66rem;
+    line-height: 1;
+}
+
+.csa-confidence-high {
+    background: var(--csa-confidence-high-bg);
+    color: var(--csa-confidence-high-text);
+}
+
+.csa-confidence-medium {
+    background: var(--csa-confidence-medium-bg);
+    color: var(--csa-confidence-medium-text);
+}
+
+.csa-confidence-low {
+    background: var(--csa-confidence-low-bg);
+    color: var(--csa-confidence-low-text);
+}
+
+/* Title on the left, badges on the right — and the badges wrap underneath
+   rather than squeezing a long document title on a narrow phone screen. */
+.csa-citation-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.4rem;
+    margin-bottom: 0.15rem;
+}
+
+.csa-citation-tags {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-shrink: 0;
+}
+
+/* ── Document table ─────────────────────────────────────────────────────── */
+.csa-table-card {
+    padding: 0;
+    overflow: hidden;
+}
+
+.csa-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.csa-table th {
+    text-align: left;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--csa-text-muted);
+    background: rgba(15, 118, 110, 0.06);
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--csa-border);
+}
+
+.csa-table td {
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--csa-border);
+    font-size: 0.92rem;
+}
+
+.csa-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* ── Conflict alert banners ─────────────────────────────────────────────── */
+.csa-banner {
+    border-radius: 12px;
+    padding: 0.8rem 1rem;
+    margin: 0.2rem 0 0.8rem 0;
+    border: 1px solid transparent;
+    border-left-width: 5px;
+}
+
+.csa-banner-warning {
+    background: var(--csa-conflict-warn-bg);
+    border-color: var(--csa-conflict-warn-border);
+    color: var(--csa-conflict-warn-text);
+}
+
+.csa-banner-danger {
+    background: var(--csa-conflict-danger-bg);
+    border-color: var(--csa-conflict-danger-border);
+    color: var(--csa-conflict-danger-text);
+}
+
+.csa-banner-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 0.3rem;
+}
+
+.csa-banner-body {
+    margin: 0.15rem 0 0.35rem 1.05rem;
+    padding: 0;
+    font-size: 0.88rem;
+}
+
+.csa-banner-body li {
+    margin: 0.1rem 0;
+}
+
+.csa-banner-footer {
+    font-size: 0.8rem;
+    opacity: 0.85;
+}
+
+/* ── Citation snippets & highlights ─────────────────────────────────────── */
+.csa-citation-card--stale {
+    border-left-color: var(--csa-superseded-text);
+    background: var(--csa-stale-card-bg);
+}
+
+.csa-citation-warning {
+    margin-top: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--csa-superseded-text);
+}
+
+.csa-snippet {
+    font-size: 0.88rem;
+    line-height: 1.55;
+    max-height: 16rem;
+    overflow-y: auto;
+    border-left: 3px solid var(--csa-border);
+    padding-left: 0.7rem;
+}
+
+.csa-highlight {
+    background: var(--csa-highlight-bg);
+    color: var(--csa-highlight-text);
+    padding: 0 0.15rem;
+    border-radius: 3px;
+    font-weight: 600;
+}
+
+/* ── Document rows & admin controls ─────────────────────────────────────── */
+.csa-doc-row {
+    padding: 0.15rem 0;
+}
+
+.csa-doc-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+}
+
+/* ── Version timeline ───────────────────────────────────────────────────── */
+.csa-timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0.2rem 0 0 0.2rem;
+}
+
+.csa-timeline-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.35rem 0;
+}
+
+.csa-timeline-connector {
+    color: var(--csa-text-muted);
+    font-size: 0.85rem;
+    line-height: 1;
+    padding-left: 0.15rem;
+}
+
+.csa-timeline-dot {
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 999px;
+    margin-top: 0.35rem;
+    flex-shrink: 0;
+    background: var(--csa-archived-text);
+}
+
+.csa-timeline-dot--active {
+    background: #16a34a;
+}
+
+.csa-timeline-dot--superseded {
+    background: #d97706;
+}
+
+.csa-timeline-dot--archived {
+    background: var(--csa-text-muted);
+}
+
+.csa-timeline-dot--current {
+    background: var(--csa-primary);
+    box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.22);
+}
+
+.csa-timeline-head {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+}
+
+.csa-timeline-here {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--csa-primary);
+    font-weight: 700;
+}
+
+/* ── Delete confirmation modal ──────────────────────────────────────────────
+   The per-row Delete button and the modal's card are tinted red so a
+   destructive action never looks like the Apply-status control beside it.
+   Streamlit exposes a widget's key as an `st-key-<key>` class (1.39+); on
+   older builds the buttons simply keep their default styling.
+========================================================================== */
+.csa-delete-card {
+    border-left: 3px solid var(--csa-danger);
+    background: var(--csa-danger-bg);
+    margin-bottom: 0.9rem;
+}
+
+div[class*="st-key-doc_delete_"] button {
+    color: var(--csa-danger-text);
+    border-color: var(--csa-danger);
+}
+
+div[class*="st-key-doc_delete_"] button:hover {
+    background: var(--csa-danger-bg);
+    color: var(--csa-danger-text);
+    border-color: var(--csa-danger);
+}
+
+/* Cancel and Confirm sit inside the modal, where the confirm button already
+   carries Streamlit's primary styling. */
+div[class*="st-key-doc_delete_cancel"] button,
+div[class*="st-key-doc_delete_confirm"] button {
+    color: inherit;
+}
+
+/* ── Chat prompt chips ──────────────────────────────────────────────────────
+   Sample questions shown before the first message. Rendered as pill-shaped
+   buttons so they read as suggestions rather than as form controls.
+========================================================================== */
+div[class*="st-key-csa_chip_"] button {
+    border-radius: 999px;
+    border: 1px dashed var(--csa-border);
+    background: transparent;
+    color: var(--csa-text-muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.3rem 0.9rem;
+    text-align: left;
+}
+
+div[class*="st-key-csa_chip_"] button:hover {
+    border-style: solid;
+    border-color: var(--csa-primary-light);
+    color: var(--csa-primary);
+    background: rgba(15, 118, 110, 0.06);
+}
+
+/* ── Chat answer actions (copy / export) ────────────────────────────────── */
+div[class*="st-key-csa_export_"] button {
+    font-size: 0.82rem;
+    padding: 0.25rem 0.6rem;
+}
+
+
+/* ── Analytics dashboard ────────────────────────────────────────────────────
+   KPI stat tiles and the helpful-rate meter. A single current number is a stat
+   tile, not a one-bar chart: the value is the whole message, and a bar would
+   only add an axis to read it against.
+========================================================================== */
+.csa-stat {
+    padding: 0.9rem 1.05rem;
+    min-height: 6.1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.15rem;
+}
+
+.csa-stat-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--csa-text-muted);
+}
+
+/* Tabular figures so a KPI row does not jitter horizontally as the numbers
+   behind it change on refresh. */
+.csa-stat-value {
+    font-size: 1.85rem;
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--csa-stat-value);
+    font-variant-numeric: tabular-nums;
+}
+
+.csa-stat-sub {
+    font-size: 0.8rem;
+    color: var(--csa-text-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+/* ── Ratio meter ─────────────────────────────────────────────────────────── */
+.csa-meter {
+    margin: 0.35rem 0 0.9rem;
+}
+
+.csa-meter-track {
+    height: 0.6rem;
+    border-radius: 999px;
+    background: var(--csa-meter-track);
+    overflow: hidden;
+}
+
+.csa-meter-fill {
+    height: 100%;
+    /* Rounded data-end anchored to the baseline: the fill starts flush at the
+       left of the track and only its leading edge is rounded. */
+    border-radius: 0 999px 999px 0;
+    background: var(--csa-meter-fill);
+    transition: width 0.25s ease;
+}
+
+.csa-meter-caption {
+    margin-top: 0.4rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Lines the refresh button up with the inputs beside it rather than with
+   their labels. */
+.csa-control-spacer {
+    height: 1.75rem;
+}
+
+
+/* ── Guideline management table ─────────────────────────────────────────────
+   Streamlit has no table widget that can hold buttons, so the registry is
+   built from st.columns rows. These rules are what make a stack of columns
+   read as a table: a quiet heading row, a rule under every row, and cell
+   text sitting on the same baseline as the buttons beside it.
+========================================================================== */
+.csa-table-head {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--csa-table-head);
+    padding: 0 0 0.3rem;
+    border-bottom: 1px solid var(--csa-table-rule);
+    margin-bottom: 0.15rem;
+}
+
+.csa-table-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    min-height: 2.4rem;
+    padding: 0.1rem 0;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--csa-table-rule);
+}
+
+/* Counts line up on their digits so the column can be scanned vertically. */
+.csa-table-num {
+    justify-content: flex-end;
+    font-variant-numeric: tabular-nums;
+}
+
+.csa-row-flag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.05rem 0.45rem;
+    border-radius: 999px;
+    background: var(--csa-row-flag-bg);
+    color: var(--csa-row-flag-text);
+    font-size: 0.72rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    cursor: help;
+}
+
+/* The two per-row admin buttons are secondary to the data beside them. */
+div[class*="st-key-csa_guideline_archive_"] button,
+div[class*="st-key-csa_guideline_supersede_"] button {
+    font-size: 0.78rem;
+    padding: 0.2rem 0.4rem;
+}
+
+/* =============================================================================
+   Mobile Responsiveness & Field Worker Accessibility
+   ============================================================================= */
+@media (max-width: 768px) {
+    .csa-header {
+        padding: 0.75rem 1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .csa-header h1 {
+        font-size: 1.35rem;
+    }
+
+    .csa-card {
+        padding: 0.85rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .csa-stat {
+        padding: 0.75rem 0.85rem;
+    }
+
+    .csa-stat-value {
+        font-size: 1.5rem;
+    }
+
+    /* Stack metadata and actions on mobile */
+    .csa-doc-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
+    }
+
+    /* Ensure touch targets meet 44px minimum recommendation */
+    div.stButton > button {
+        min-height: 2.75rem;
+        font-size: 0.95rem;
+    }
+
+    /* Make citations cleanly wrap on smaller displays */
+    .csa-source-card {
+        padding: 0.65rem 0.85rem;
+    }
+
+    /* Prevent table clipping */
+    div[data-testid="stDataFrame"] {
+        overflow-x: auto;
+    }
+
+    /* Tabs overflow smoothly on mobile screens */
+    div[data-testid="stTabs"] [role="tablist"] {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+@media (max-width: 480px) {
+    .csa-header h1 {
+        font-size: 1.2rem;
+    }
+
+    .csa-stat-value {
+        font-size: 1.3rem;
+    }
+
+    .csa-table-cell {
+        font-size: 0.8rem;
+    }
+}
+
+/* =============================================================================
+   Chat Layout — Sticky Input & Bubble Alignment
+   =============================================================================
+   Forces st.chat_input to stay fixed at the viewport bottom regardless of
+   content length, and styles user/assistant message bubbles so they align on
+   opposite sides like a real chat app.
+============================================================================= */
+
+/* ── Sticky chat input bar ──────────────────────────────────────────────── */
+div[data-testid="stBottom"] {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 999 !important;
+    background: var(--background-color, #fff) !important;
+    border-top: 1px solid var(--csa-border) !important;
+    padding: 0.5rem 1rem 0.75rem !important;
+}
+
+/* Add bottom padding to main content so last message is never hidden behind input */
+section[data-testid="stMain"] > div:first-child {
+    padding-bottom: 5rem !important;
+}
+
+/* ── User message bubble — right side ───────────────────────────────────── */
+div[data-testid="stChatMessage"]:has(
+    [data-testid="chatAvatarIcon-user"]
+) {
+    flex-direction: row-reverse !important;
+}
+
+div[data-testid="stChatMessage"]:has(
+    [data-testid="chatAvatarIcon-user"]
+) div[data-testid="stMarkdownContainer"] {
+    background: var(--csa-primary) !important;
+    color: #fff !important;
+    border-radius: 18px 4px 18px 18px !important;
+    padding: 0.65rem 1rem !important;
+    max-width: 80% !important;
+    margin-left: auto !important;
+    box-shadow: 0 2px 8px rgba(15, 118, 110, 0.25) !important;
+}
+
+/* ── Assistant message bubble — left side ───────────────────────────────── */
+div[data-testid="stChatMessage"]:has(
+    [data-testid="chatAvatarIcon-assistant"]
+) div[data-testid="stMarkdownContainer"] {
+    background: var(--csa-bg-card, #f8fafc) !important;
+    border: 1px solid var(--csa-border) !important;
+    border-radius: 4px 18px 18px 18px !important;
+    padding: 0.65rem 1rem !important;
+    max-width: 85% !important;
+    box-shadow: var(--csa-shadow) !important;
+}
+
+/* Keep citations and action rows full-width (not bubble-constrained) */
+div[data-testid="stChatMessage"] .csa-citation-box,
+div[data-testid="stChatMessage"] .stDownloadButton,
+div[data-testid="stChatMessage"] .stButton {
+    max-width: 100% !important;
+}
