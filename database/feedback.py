@@ -185,7 +185,7 @@ def list_session_feedback(
         records: list[dict[str, Any]] = response.data or []
         print(
             f"[feedback] list_session_feedback: session={session_id!r}, "
-            f"vote_filter={vote_filter} → {len(records)} record(s)."
+            f"vote_filter={vote_filter} -> {len(records)} record(s)."
         )
         return records
 
@@ -229,7 +229,7 @@ def list_user_feedback(
             .execute()
         )
         records: list[dict[str, Any]] = response.data or []
-        print(f"[feedback] list_user_feedback: user_id={user_id!r} → {len(records)} record(s).")
+        print(f"[feedback] list_user_feedback: user_id={user_id!r} -> {len(records)} record(s).")
         return records
 
     except (ValueError, RuntimeError):
@@ -435,7 +435,7 @@ def list_slow_queries(
         )
         records: list[dict[str, Any]] = response.data or []
         print(
-            f"[feedback] list_slow_queries: threshold={threshold_ms}ms → "
+            f"[feedback] list_slow_queries: threshold={threshold_ms}ms -> "
             f"{len(records)} record(s)."
         )
         return records
@@ -471,7 +471,7 @@ def list_failed_queries(limit: int = 50) -> list[dict[str, Any]]:
             .execute()
         )
         records: list[dict[str, Any]] = response.data or []
-        print(f"[feedback] list_failed_queries → {len(records)} record(s).")
+        print(f"[feedback] list_failed_queries -> {len(records)} record(s).")
         return records
 
     except Exception as exc:

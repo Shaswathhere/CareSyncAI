@@ -106,7 +106,7 @@ def insert_document_record(
             raise RuntimeError("Insert returned no data — check Supabase RLS policies.")
 
         document_id: str = response.data[0]["id"]
-        print(f"[documents] Inserted document '{title}' (lang={language}) → id={document_id}")
+        print(f"[documents] Inserted document '{title}' (lang={language}) -> id={document_id}")
         return document_id
 
     except RuntimeError:
@@ -385,7 +385,7 @@ def archive_document(document_id: str) -> bool:
             print(f"[documents] archive_document: No document found with id={document_id}.")
             return False
 
-        print(f"[documents] archive_document: Document id={document_id} → ARCHIVED.")
+        print(f"[documents] archive_document: Document id={document_id} -> ARCHIVED.")
         return True
 
     except (ValueError, RuntimeError):

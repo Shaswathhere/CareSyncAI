@@ -154,7 +154,7 @@ def update_audio_query_transcription(
             print(f"[audio] update_audio_query_transcription: No record found id={audio_query_id!r}.")
             return False
 
-        print(f"[audio] Audio query id={audio_query_id!r} updated → status={status}.")
+        print(f"[audio] Audio query id={audio_query_id!r} updated -> status={status}.")
         return True
 
     except (ValueError, RuntimeError):
@@ -297,7 +297,7 @@ def list_user_audio_queries(
         records: list[dict[str, Any]] = response.data or []
         print(
             f"[audio] list_user_audio_queries: user_id={user_id!r}, "
-            f"status={status_filter} → {len(records)} record(s)."
+            f"status={status_filter} -> {len(records)} record(s)."
         )
         return records
 
@@ -451,7 +451,7 @@ def list_unreviewed_transcriptions(limit: int = 50) -> list[dict[str, Any]]:
             .execute()
         )
         records: list[dict[str, Any]] = response.data or []
-        print(f"[audio] list_unreviewed_transcriptions → {len(records)} record(s).")
+        print(f"[audio] list_unreviewed_transcriptions -> {len(records)} record(s).")
         return records
 
     except Exception as exc:

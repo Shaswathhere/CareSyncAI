@@ -154,7 +154,7 @@ def list_user_sessions(
         )
 
         sessions: list[dict[str, Any]] = response.data or []
-        print(f"[conversation] list_user_sessions: user_id={user_id!r} → {len(sessions)} session(s).")
+        print(f"[conversation] list_user_sessions: user_id={user_id!r} -> {len(sessions)} session(s).")
         return sessions
 
     except (ValueError, RuntimeError):
@@ -204,7 +204,7 @@ def update_session_title(session_id: str, title: str) -> bool:
             print(f"[conversation] update_session_title: No session found id={session_id!r}.")
             return False
 
-        print(f"[conversation] Session id={session_id!r} title updated → {trimmed_title!r}.")
+        print(f"[conversation] Session id={session_id!r} title updated -> {trimmed_title!r}.")
         return True
 
     except (ValueError, RuntimeError):
@@ -376,7 +376,7 @@ def get_session_messages(
         response = query.execute()
         messages: list[dict[str, Any]] = response.data or []
         print(
-            f"[conversation] get_session_messages: session={session_id!r} → "
+            f"[conversation] get_session_messages: session={session_id!r} -> "
             f"{len(messages)} message(s)."
         )
         return messages

@@ -98,7 +98,7 @@ def upsert_user_locale(
 
         record: dict[str, Any] = response.data[0]
         print(
-            f"[locale] upsert_user_locale: user_id={user_id!r} → "
+            f"[locale] upsert_user_locale: user_id={user_id!r} -> "
             f"preferred={preferred_lang}, fallback={fallback_lang}."
         )
         return record
@@ -201,7 +201,7 @@ def fetch_documents_by_language(
         docs: list[dict[str, Any]] = response.data or []
         print(
             f"[locale] fetch_documents_by_language: language={language!r}, "
-            f"status={status_filter} → {len(docs)} document(s)."
+            f"status={status_filter} -> {len(docs)} document(s)."
         )
         return docs
 
