@@ -95,7 +95,7 @@ _EN: Dict[str, str] = {
     "filters.reset": "Reset filters",
 
     # ── Documents tab ────────────────────────────────────────────────────────
-    "docs.heading": "📄 Uploaded Public-Health Documents",
+    "docs.heading": "📄 Public-Health Documents",
     "docs.empty": "No documents have been uploaded yet. Use the **Upload Guideline** tab to add one.",
     "docs.session_notice": "⚠️ Showing session data — Supabase is not reachable, so status edits won't persist.",
     "docs.showing": "Showing **{visible}** of **{total}** documents · {active} active — filter them in the sidebar.",
